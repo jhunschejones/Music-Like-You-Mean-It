@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user
-    @user = User.find_by(id: session[:user_id])
-    unless @user
+    @currrent_user = User.find_by(id: session[:user_id])
+    unless @currrent_user
       session[:return_to] ||= request.url
       redirect_to login_url, notice: "Please log in to access this page"
     end

@@ -1,0 +1,33 @@
+<div class="login-form">
+  <% if flash[:alert] %>
+    <div class="notification is-danger"><%= flash[:alert] %></div>
+  <% elsif flash[:notice] %>
+    <div class="notification is-warning"><%= flash[:notice] %></div>
+  <% end %>
+
+  <h2 class="title is-4">Please log in:</h2>
+
+  <%= form_with(url: login_path) do |f| %>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input" name="email" type="email" placeholder="Email">
+        <span class="icon is-small is-left">
+          <%= fa_icon("envelope", class: "fas") %>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input" name="password" type="password" placeholder="Password">
+        <span class="icon is-small is-left">
+          <%= fa_icon("lock", class: "fas") %>
+        </span>
+      </p>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Log in", class: "button is-info" %>
+    </div>
+  <% end %>
+</div>
