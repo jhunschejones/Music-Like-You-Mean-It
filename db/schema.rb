@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_171537) do
+ActiveRecord::Schema.define(version: 2020_06_05_175631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,5 +46,36 @@ ActiveRecord::Schema.define(version: 2020_06_05_171537) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "blogs", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "embedded_video"
+    t.datetime "published_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["title"], name: "index_blogs_on_title", unique: true
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.bigint "blog_id", null: false
+    t.string "text", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["blog_id", "text"], name: "index_tags_on_blog_id_and_text", unique: true
+    t.index ["blog_id"], name: "index_tags_on_blog_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name_ciphertext", null: false
+    t.string "name_bidx", null: false
+    t.string "email_ciphertext", null: false
+    t.string "email_bidx", null: false
+    t.string "password_digest", null: false
+    t.string "site_role", default: "user"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email_bidx"], name: "index_users_on_email_bidx", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "tags", "blogs", on_delete: :cascade
 end
