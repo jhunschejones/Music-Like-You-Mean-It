@@ -1,0 +1,14 @@
+<div class="blog-container">
+  <div class="blog">
+    <h2 class="blog-title title is-1"><%= blog.title %></h2>
+    <div class="blog-embedded-video">
+      <%= raw blog.embedded_video %>
+    </div>
+    <div class="blog-content">
+      <%= blog.content %>
+    </div>
+    <div class="blog-details-link">
+      <%= link_to("Continue reading...", blog_path(blog.id), class: "has-text-link") %>
+    </div>
+  </div>
+</div>
