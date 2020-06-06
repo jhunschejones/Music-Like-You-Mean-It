@@ -107,10 +107,32 @@
           margin-top: 16px;
         }
       }
-      .blog-details-link {
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 10px;
+    }
+  }
+
+  .lower-cards-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    .columns {
+      width: 100%;
+      max-width: 780px;
+      .author-details,
+      .workshop-details {
+        margin: 12px 6px 12px 6px;
+        background-color: white;
+        align-content: center;
+        .author-image {
+          height: 128px;
+          border-radius: 200px;
+        }
+        .workshop-banner {
+          height: 150px;
+        }
+        .button {
+          margin-bottom: 5px;
+        }
       }
     }
   }
