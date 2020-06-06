@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>MusicLikeYouMeanIt</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Music Like You Mean It</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +12,31 @@
   </head>
 
   <body>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/workshop">
+        <%= image_tag("logo.jpg", height: "28") %>
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="navbar-menu main-nav-menu">
+      <div class="navbar-start">
+      </div>
+
+      <div class="navbar-end">
+        <%= link_to("About", pages_about_path, class: "navbar-item") %>
+        <%= link_to("Blog", blogs_path, class: "navbar-item") %>
+        <%= link_to("Workshop", workshop_path, class: "navbar-item") %>
+      </div>
+    </div>
+  </nav>
+
     <%= yield %>
   </body>
 </html>

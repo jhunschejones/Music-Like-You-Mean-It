@@ -9,6 +9,7 @@
 // <action-text-attachment> element we wrap around attachments. Otherwise,
 // images in galleries will be squished by the max-width: 33%; rule.
 .trix-content {
+  background-color: white;
   .attachment-gallery {
     > action-text-attachment,
     > .attachment {
@@ -35,8 +36,12 @@
   }
 }
 
-// Remove attachments button from trix editor
 trix-toolbar {
+  .trix-button {
+    background-color: white;
+  }
+
+  // Remove attachments button from trix editor
   .trix-button-group--file-tools {
     display: none;
   }
@@ -44,25 +49,9 @@ trix-toolbar {
 
 // Style trix content editor boxes
 trix-editor {
-  &#comment_content {
-    min-height: 250px;
-    max-height: 350px;
-    overflow-y: auto;
-  }
-  &#event_description {
-    height: 200px;
-    overflow-y: auto;
-  }
-  &#project_description {
-    height: 250px;
-    overflow-y: auto;
-  }
-  &#track_description,
-  &#track_version_description {
-    min-height: 200px;
-    max-height: 300px;
-    overflow-y: auto;
-  }
+  min-height: 250px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 // bulma overrides this so we need to set it back
