@@ -1,6 +1,6 @@
 html {
-  // Bulma `$white-ter`
-  background-color: hsl(0, 0%, 96%);
+  // background-color: hsl(0, 0%, 95%);
+  background-color: #eeeeee;
   // Bulma `$grey-dark`
   color: hsl(0, 0%, 29%);
 }
@@ -11,6 +11,18 @@ body {
 
 .flash {
   margin: 5px;
+}
+
+.page-container {
+  min-height: 84vh;
+}
+
+.footer {
+  margin-top: 12px;
+  padding: 24px;
+  .footer-link {
+    margin: 0px 8px 0px 20px;
+  }
 }
 
 .login-form-container {

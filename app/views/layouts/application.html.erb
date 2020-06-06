@@ -12,31 +12,39 @@
   </head>
 
   <body>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/workshop">
-        <%= image_tag("logo.jpg", height: "28") %>
-      </a>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/workshop">
+          <%= image_tag("logo.jpg", height: "28") %>
+        </a>
 
-      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div class="navbar-menu main-nav-menu">
-      <div class="navbar-start">
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
-      <div class="navbar-end">
-        <%= link_to("About", pages_about_path, class: "navbar-item") %>
-        <%= link_to("Blog", blogs_path, class: "navbar-item") %>
-        <%= link_to("Workshop", workshop_path, class: "navbar-item") %>
-      </div>
-    </div>
-  </nav>
+      <div class="navbar-menu main-nav-menu">
+        <div class="navbar-start">
+        </div>
 
-    <%= yield %>
+        <div class="navbar-end">
+          <%= link_to("About", pages_about_path, class: "navbar-item") %>
+          <%= link_to("Blog", blogs_path, class: "navbar-item") %>
+          <%= link_to("Workshop", workshop_path, class: "navbar-item") %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-container"><%= yield %></div>
+
+    <footer class="footer">
+      <span>&copy; <%= Time.now.year %> Music Like You Mean It</span>
+      <%= link_to("Terms", pages_terms_path, class: "footer-link is-pulled-right") %>
+      <%= link_to("Privacy", pages_privacy_policy_path, class: "footer-link is-pulled-right") %>
+      <div class="content">
+      </div>
+    </footer>
   </body>
 </html>
