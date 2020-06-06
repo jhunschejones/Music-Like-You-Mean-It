@@ -11,5 +11,8 @@ class StaticPagesController < ApplicationController
   end
 
   def workshop
+    @current_user = User.find(session[:user_id])
+  rescue ActiveRecord::RecordNotFound
+    render 'users/new_workshop_user'
   end
 end

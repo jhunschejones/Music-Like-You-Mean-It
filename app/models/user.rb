@@ -12,6 +12,15 @@ class User < ApplicationRecord
   SITE_ADMIN = "admin".freeze
   USER_SITE_ROLES = [SITE_USER, SITE_ADMIN].freeze
 
+  def self.find_or_create_workshop_user(name:, email:)
+    temp_password = SecureRandom.hex
+    create_with(
+      name: name,
+      password: temp_password,
+      password_confirmation: temp_password
+    ).find_or_create_by(email: email)
+  end
+
   private
 
   def site_role_valid

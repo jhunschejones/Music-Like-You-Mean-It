@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'static_pages#workshop'
+
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
@@ -12,7 +14,9 @@ Rails.application.routes.draw do
     get 'workshop' => :workshop
   end
 
-  resources :users, only: [:index, :new, :create, :destroy]
+  post '/workshop_users', to: 'users#create_workshop_users'
+
+  resources :users, only: [:index]
   resources :blogs, except: [:delete]
   resources :tags, only: [:create, :destroy]
 end

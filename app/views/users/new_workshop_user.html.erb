@@ -1,0 +1,28 @@
+<div class="new-user">
+  <h2 class="title is-4">New user:</h2>
+
+  <%= form_with(model: @user, url: workshop_users_path) do |f| %>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Name" name="user[name]">
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </p>
+    </div>
+
+    <div class="field">
+      <p class="control has-icons-left">
+        <input class="input" type="email" placeholder="Email" name="user[email]">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      </p>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Create", class: "button is-info" %>
+      <%= link_to "Back", blogs_path, class: "button is-light" %>
+    </div>
+  <% end %>
+</div>
