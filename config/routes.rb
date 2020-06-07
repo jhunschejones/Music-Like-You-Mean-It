@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   post '/workshop_users', to: 'users#create_workshop_users'
 
   resources :users, only: [:index]
-  resources :blogs, except: [:delete]
-  resources :tags, only: [:create, :destroy]
+  resources :blogs, except: [:delete, :destroy]
+  resources :tags, only: [:destroy]
 end

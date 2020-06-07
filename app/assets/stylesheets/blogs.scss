@@ -1,6 +1,7 @@
 .new-blog,
 .edit-blog {
   padding: 12px;
+  margin-bottom: 20px;
   .title {
     font-weight: normal;
     margin-bottom: 12px;
@@ -8,26 +9,42 @@
   .actions {
     padding-top: 10px;
   }
+  .tags {
+    display: block;
+  }
 }
 
 .blogs {
-  margin-bottom: 12px;
+  margin-bottom: 36px;
   .blog-container {
     padding: 12px;
     display: flex;
     justify-content: center;
     .blog {
+      border-radius: 2px;
       margin: 12px 0px -12px 0px;
-      padding: 12px;
+      padding: 16px;
       background-color: white;
       width: 100%;
       max-width: 780px;
       .blog-title {
         font-weight: 500;
+        margin-bottom: 5px;
       }
       @media screen and (max-width: 680px) {
         .blog-title {
           font-size: 30px;
+        }
+      }
+      .sub-header {
+        margin-bottom: 12px;
+        display: inline-block;
+        .tags {
+          display: inline-block;
+          margin: 0px 16px 0px 0px;
+        }
+        .published-at {
+          display: inline-block;
         }
       }
       .blog-embedded-video {
@@ -46,7 +63,7 @@
         }
       }
       .blog-content {
-        padding-top: 12px;
+        padding-top: 16px;
         // change height of line breaks between paragraphs
         br {
           display: block;
@@ -57,30 +74,43 @@
       .blog-details-link {
         font-size: 18px;
         font-weight: 600;
-        margin-top: 10px;
+        margin-top: 12px;
       }
     }
   }
 }
 
 .blog-details {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
   .blog-container {
     padding: 12px;
     display: flex;
     justify-content: center;
     .blog {
+      border-radius: 2px;
       margin: 12px 0px -12px 0px;
-      padding: 12px;
+      padding: 16px;
       background-color: white;
       width: 100%;
       max-width: 780px;
       .blog-title {
         font-weight: 500;
+        margin-bottom: 5px;
       }
       @media screen and (max-width: 680px) {
         .blog-title {
           font-size: 30px;
+        }
+      }
+      .sub-header {
+        margin-bottom: 12px;
+        display: inline-block;
+        .tags {
+          display: inline-block;
+          margin: 0px 16px 0px 0px;
+        }
+        .published-at {
+          display: inline-block;
         }
       }
       .blog-embedded-video {
@@ -99,7 +129,7 @@
         }
       }
       .blog-content {
-        padding-top: 12px;
+        padding-top: 16px;
         // change height of line breaks between paragraphs
         br {
           display: block;
@@ -118,9 +148,20 @@
     .columns {
       width: 100%;
       max-width: 780px;
+      @media screen and (min-width: 768px) {
+        :first-child {
+          margin-right: 8px;
+        }
+        :last-child {
+          margin-left: 8px;
+        }
+      }
+
       .author-details,
       .workshop-details {
-        margin: 12px 6px 12px 6px;
+        border-radius: 2px;
+        margin-top: 12px;
+        margin-bottom: 12px;
         background-color: white;
         align-content: center;
         .author-image {
@@ -131,7 +172,7 @@
           height: 150px;
         }
         .button {
-          margin-bottom: 5px;
+          margin: 2px 0px 5px 0px;
         }
       }
     }

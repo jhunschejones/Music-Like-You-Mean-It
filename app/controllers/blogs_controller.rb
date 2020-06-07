@@ -1,8 +1,17 @@
 class BlogsController < ApplicationController
-  skip_before_action :authenticate_user, only: [:index, :show]
+  skip_before_action :authenticate_admin_user, only: [:index, :show]
 
   def index
-    @blogs = Blog.order({ published_at: :desc })
+    unless params[:tag]
+      @blogs = Blog.includes(:tags).order({ published_at: :desc }) and return
+    end
+
+    @blogs =
+      if params[:tag].is_a? Array
+        Blog.joins(:tags).where("tags.text IN (?)", params[:tag]).to_a
+      else
+        Blog.joins(:tags).where("tags.text = ?", params[:tag]).to_a
+      end
   end
 
   def show
@@ -14,26 +23,36 @@ class BlogsController < ApplicationController
   end
 
   def edit
-    @blog = Blog.find(params[:id])
+    @blog = Blog.includes(:tags).find(params[:id])
+    @tag = Tag.new
   end
 
   def create
-    Blog.create!(blogs_params)
+    ActiveRecord::Base.transaction do
+      blog = Blog.create!(blogs_params.except(:blog_tags))
+      blogs_params[:blog_tags].split(",").each do |tag_text|
+        Tag.create!(blog_id: blog.id, text: tag_text)
+      end
+    end
+
     redirect_to blogs_path
   end
 
   def update
-    @blog = Blog.find(params[:id])
-    @blog.update!(blogs_params)
-    redirect_to blogs_path
-  end
+    ActiveRecord::Base.transaction do
+      @blog = Blog.find(params[:id])
+      @blog.update!(blogs_params.except(:blog_tags))
+      params[:blog][:tag][:text].split(",").each do |tag_text|
+        Tag.create(text: tag_text, blog_id: @blog.id)
+      end
+    end
 
-  def destroy
+    redirect_to blogs_path
   end
 
   private
 
   def blogs_params
-    params.require(:blog).permit(:title, :embedded_video, :published_at, :content)
+    params.require(:blog).permit(:title, :embedded_video, :published_at, :content, :blog_tags, tag_attributes: [:text, :blog_id])
   end
 end

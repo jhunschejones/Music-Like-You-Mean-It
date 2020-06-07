@@ -1,7 +1,12 @@
 class TagsController < ApplicationController
-  def create
+  def destroy
+    @tag = Tag.find(params[:id])
+    @tag.delete
   end
 
-  def destroy
+  private
+
+  def tag_params
+    params.require(:tag).permit(:text, :blog_id)
   end
 end

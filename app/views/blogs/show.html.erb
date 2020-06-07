@@ -2,6 +2,22 @@
   <div class="blog-container">
     <div class="blog">
       <h2 class="blog-title title is-1"><%= @blog.title %></h2>
+      <div class="has-text-grey sub-header">
+        <% if @blog.tags.size > 0 %>
+          <div class="tags">
+            <% @blog.tags.each_with_index do |tag, index| %>
+              <% if (index + 1) < @blog.tags.size %>
+                <%= link_to("#{tag.text},", blogs_path(tag: tag.text), class: "has-link-text")%>
+              <% else %>
+                <%= link_to("#{tag.text}", blogs_path(tag: tag.text), class: "has-link-text")%>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="published-at">
+          <%= @blog.published_at.localtime.strftime("%B %-d, %Y") %>
+        </div>
+      </div>
       <div class="blog-embedded-video"><%= raw @blog.embedded_video %></div>
       <div class="blog-content"><%= @blog.content %></div>
     </div>
@@ -16,9 +32,10 @@
         <p> online educator, and heavy music fan.</p>
       </div>
       <div class="workshop-details has-text-centered column">
-        <%= image_tag("workshop_banner.jpg", class: "workshop-banner") %>
+        <div><%= image_tag("workshop_banner.jpg", class: "workshop-banner") %></div>
         <%= link_to("Watch the free workshop", workshop_path, class: "button is-info") %>
-        <p>Learn twelve of the most important decisions behind every great music creation success.</p>
+        <p>Learn twelve of the most important decisions</p>
+        <p>behind every great music creation success.</p>
       </div>
     </div>
   </div>

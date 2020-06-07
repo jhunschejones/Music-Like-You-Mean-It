@@ -23,6 +23,11 @@
       <small class="has-text-grey-light">(USA Pacific Time)</small>
     </div>
 
+    <div class="field">
+      <%= f.label :blog_tags %>
+      <%= f.text_field :blog_tags, autocomplete: 'off', class: "input" %>
+    </div>
+
     <div class="actions">
       <%= f.submit "Create", class: "button is-info" %>
       <%= link_to "Back", blogs_path, class: "button is-warning" %>
