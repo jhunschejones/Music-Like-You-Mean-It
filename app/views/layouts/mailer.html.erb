@@ -2,12 +2,28 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <style>
-      /* Email styles need to be inline */
-    </style>
+    <%= stylesheet_link_tag 'email', media: 'all' %>
   </head>
 
   <body>
-    <%= yield %>
+    <table align='center' class="email-container">
+      <td>
+        <div class="email-content">
+          <table align='center' class="logo-container">
+            <td>
+              <%= image_tag("logo.jpg", height: "28", alt: "Music Like You Mean It logo") %>
+            </td>
+          </table>
+
+          <%= yield %>
+
+          <div class="footer">
+            <p>
+              Don't want to receive any more emails from musiclikeyoumeanit.com?&nbsp;&nbsp;<%= link_to("Unsubscribe", unsubscribe_url(id: @user.unsubscribe_key)) %>
+            </p>
+          </div>
+        </div>
+      </td>
+    </table>
   </body>
 </html>

@@ -36,6 +36,26 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # DELIVER EMAILS IN DEVELOPMENT MODE:
+  config.action_mailer.asset_host = 'http://localhost:3000'
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {
+    from: 'Music Like You Mean It',
+    skip_premailer: true # https://github.com/fphilipe/premailer-rails/issues/232
+  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'localhost:3000',
+    user_name:            ENV['EMAIL_USERNAME'],
+    password:             ENV['EMAIL_PASSWORD'],
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

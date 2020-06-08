@@ -46,29 +46,37 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Expire session cookies after 7 days, serve https-only in production
-  # config.session_store :cookie_store, expire_after: 7.days, secure: Rails.env.production?
-  config.session_store :cookie_store, secure: Rails.env.production?
+  config.session_store :cookie_store, key: "__Host-music_like_you_mean_it_session", secure: true # same_site: :secure
 
-  # Use the lowest log level to ensure availability of diagnostic information
-  # when problems arise.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
   config.cache_store = :redis_cache_store, {
-    url: ENV['RAILS_CACHE_URL'],
-    expires_in: 2.days,
+    url: ENV['REDIS_URL'],
+    expires_in: 5.days,
     size: 25.megabytes
   }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :sidekiq
   # config.active_job.queue_name_prefix = "music_like_you_mean_it_production"
 
   config.action_mailer.perform_caching = false
+
+  # ENABLE EMAILS IN PRODUCTION:
+  config.action_mailer.asset_host = 'https://music-like-you-mean-it.herokuapp.com'
+  config.action_mailer.default_url_options = { host: 'music-like-you-mean-it.herokuapp.com', protocol: 'https' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = { from: 'Music Like You Mean It' }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: 'musiclikeyoumeanit.com',
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
