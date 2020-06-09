@@ -12,6 +12,20 @@
  *
  *= require font_awesome5_webfont
  *= require bulma
- *= require_tree .
+ *= require actiontext
+ *= require blogs
+ *= require static_pages
+ *= require workshop
+ *= require site
  *= require_self
  */
+
+<% unless Rails.env.production? %>
+// https://medium.com/@kelishrestha97/how-to-install-font-awesome-with-yarn-in-rails-6-0-c2506543c13d
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+<% end %>
