@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   post '/workshop_users', to: 'users#create_workshop_users'
 
-  resources :users, only: [:index]
+  get '/unsubscribe', to: 'users#unsubscribe', as: :unsubscribe
+  post '/blogs/search', to: 'blogs#index', as: :blog_search
+  resources :users, only: [:index, :destroy]
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
 end
