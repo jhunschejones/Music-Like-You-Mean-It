@@ -57,6 +57,13 @@ trix-editor {
 // bulma overrides this so we need to set it back
 trix-editor,
 .trix-content {
+  line-height: 1.6em;
+  h1 {
+    font-size: 24px;
+    padding-bottom: 14px;
+    padding-top: 4px;
+    font-weight: 700;
+  }
   ul {
     li {
       margin-left: 24px;
