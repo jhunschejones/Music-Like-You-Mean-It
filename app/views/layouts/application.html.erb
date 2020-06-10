@@ -37,13 +37,32 @@
       </div>
     </nav>
 
+    <% if flash[:alert] %>
+      <div class="flash notification is-danger">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:alert] %></p>
+      </div>
+    <% elsif flash[:notice] %>
+      <div class="flash notification is-warning">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:notice] %></p>
+      </div>
+    <% elsif flash[:success] %>
+      <div class="flash notification is-success">
+        <button class="delete"></button>
+        <p class="notice"><%= flash[:success] %></p>
+      </div>
+    <% end %>
+
     <div class="page-container"><%= yield %></div>
 
-    <footer class="footer">
-      <span>&copy; <%= Time.now.year %> Music Like You Mean It</span>
-      <%= link_to("Terms", pages_terms_path, class: "footer-link is-pulled-right") %>
-      <%= link_to("Privacy", pages_privacy_policy_path, class: "footer-link is-pulled-right") %>
-      <div class="content">
+    <footer class="footer columns">
+      <div class="column is-four-fifths-desktop is-two-thirds-tablet">
+        <span>&copy; <%= Time.now.year %> Music Like You Mean It</span>
+      </div>
+      <div class="column">
+        <%= link_to("Terms", pages_terms_path, class: "footer-link") %>
+        <%= link_to("Privacy", pages_privacy_policy_path, class: "footer-link") %>
       </div>
     </footer>
   </body>
