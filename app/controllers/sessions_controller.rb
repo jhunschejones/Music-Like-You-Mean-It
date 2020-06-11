@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user
+  skip_before_action :authenticate_admin_user
 
   def new
     if session[:user_id]
