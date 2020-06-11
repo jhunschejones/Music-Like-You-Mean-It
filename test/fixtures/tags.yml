@@ -4,19 +4,19 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 
-mixing:
+mixing_1:
   text: Mixing
   blog: mixing_snare
 
-mixing:
+mixing_2:
   text: Mixing
   blog: mixing_kick
 
-drums:
+drums_1:
   text: Drums
   blog: mixing_snare
 
-drums:
+drums_2:
   text: Drums
   blog: mixing_kick
 
