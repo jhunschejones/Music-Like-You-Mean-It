@@ -26,23 +26,34 @@
 }
 
 .workshop-page-container {
-  padding: 60px 0px 130px 0px;
-  @media screen and (max-width: 440px) {
-    padding: 15px 0px 80px 0px;
-    min-height: 84vh;
-  }
+  padding: 50px 0px 130px 0px;
   display: flex;
   justify-content: center;
   background: white;
   height: 100%;
+  @media screen and (max-width: 440px) {
+    padding: 15px 0px 80px 0px;
+    min-height: 84vh;
+  }
+  .workshop-title {
+    font-size: 36px;
+    line-height: 1.125;
+    font-weight: 600;
+    color: #363636;
+    margin-bottom: 24px;
+    @media screen and (max-width: 440px) {
+      font-size: 27px;
+    }
+  }
   .workshop-page-content {
     margin: 12px 0px -12px 0px;
     padding: 24px;
     background-color: white;
     width: 100%;
     max-width: 700px;
-    p {
-      margin-bottom: 16px
+    .description {
+      line-height: 1.6;
+      margin-bottom: 26px;
     }
   }
 }
