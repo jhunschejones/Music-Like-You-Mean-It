@@ -9,12 +9,19 @@ gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 gem 'webpacker'
 gem 'turbolinks', '~> 5'
+
 gem 'redis', '~> 4.0'
+gem 'sidekiq'
+gem 'mailgun-ruby'
+gem 'premailer-rails'
+
 gem 'bcrypt'
 gem 'lockbox'
 gem 'blind_index'
+
 gem 'font_awesome5_rails'
 gem 'bulma-rails'
+gem 'will_paginate'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

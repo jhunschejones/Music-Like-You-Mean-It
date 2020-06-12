@@ -24,7 +24,7 @@
       <%= blog.content %>
     </div>
     <div class="blog-details-link">
-      <%= link_to("Continue reading...", blog_path(blog.id), class: "has-text-link") %>
+      <%= link_to("Continue reading...", blog_path(id: blog.id_for_url), class: "has-text-link") %>
     </div>
   </div>
 </div>

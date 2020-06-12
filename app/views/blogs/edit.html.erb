@@ -23,10 +23,15 @@
       <small class="has-text-grey-light">(USA Pacific Time)</small>
     </div>
 
+    <div class="field">
+      <%= f.label :named_url %>
+      <%= f.text_field :named_url, autocomplete: 'off', class: "input" %>
+    </div>
+
     <h2 class="title is-4">Edit tags:</h2>
 
     <ul class="tags">
-      <%= render(@blog.tags) %>
+      <%= render(@blog.tags, cached: true) %>
     </ul>
 
     <div class="new-tag-form">
@@ -43,6 +48,4 @@
       <%= link_to "Back", blogs_path, class: "button is-warning" %>
     </div>
   <% end %>
-
-  <br/><br/>
 </div>
