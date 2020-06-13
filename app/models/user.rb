@@ -12,6 +12,14 @@ class User < ApplicationRecord
   SITE_ADMIN = "admin".freeze
   USER_SITE_ROLES = [SITE_USER, SITE_ADMIN].freeze
 
+  def is_admin?
+    site_role == SITE_ADMIN
+  end
+
+  def unsubscribe_key
+    Rails.application.message_verifier(:unsubscribe).generate(id)
+  end
+
   def self.find_or_create_workshop_user(name:, email:)
     temp_password = SecureRandom.hex
     create_with(
@@ -19,6 +27,12 @@ class User < ApplicationRecord
       password: temp_password,
       password_confirmation: temp_password
     ).find_or_create_by(email: email)
+  end
+
+  def self.from_unsubscribe_key(unsubscribe_key)
+    find(
+      Rails.application.message_verifier(:unsubscribe).verify(unsubscribe_key)
+    )
   end
 
   private

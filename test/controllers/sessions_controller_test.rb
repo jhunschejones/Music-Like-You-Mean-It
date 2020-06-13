@@ -2,27 +2,27 @@ require 'test_helper'
 
 # bundle exec ruby -Itest test/controllers/sessions_controller_test.rb
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  test "login" do
+  test "admin login" do
     https!
-    get "/login"
+    get login_path
     assert_response :success
 
-    post "/login", params: { email: users(:site_admin).email, password: "secret" }
+    post login_path, params: { email: users(:site_admin).email, password: "secret" }
     follow_redirect!
-    assert_equal "/users/#{users(:site_admin).id}", path
+    assert_equal blogs_path, path
   end
 
   test "logout" do
     login_as(users(:site_admin))
-    delete "/logout"
+    delete logout_path
     follow_redirect!
     assert_equal "Succesfully logged out", flash[:notice]
-    assert_equal "/login", path
+    assert_equal login_path, path
   end
 
   private
 
   def login_as(user)
-    post "/login", params: { email: user.email, password: "secret" }
+    post login_path, params: { email: user.email, password: "secret" }
   end
 end
