@@ -1,5 +1,21 @@
-<h2>All Users</h1>
-<p>Total: <%= @users.size %></p>
-<ul>
-  <%= render(@users) %>
-</ul>
+<div class="all-users">
+  <div class="all-users-container">
+    <br/>
+    <h2 class="title is-4">All site users</h1>
+    <p class="has-text-grey-light">Total: <%= @users.size %></p>
+    <table class="table is-fullwidth is-hoverable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Joined on</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render(@users) %>
+      </tbody>
+    </table>
+    <%= link_to("Add a user", new_user_path, class: "button is-info") %>
+  </div>
+</div>

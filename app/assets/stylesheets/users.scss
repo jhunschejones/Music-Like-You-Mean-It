@@ -1,0 +1,22 @@
+.new-user {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  .new-user-form-container {
+    width: 100%;
+    max-width: 700px;
+  }
+}
+
+.all-users {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  .all-users-container {
+    width: 100%;
+    max-width: 700px;
+    .title {
+      margin-bottom: 5px;
+    }
+  }
+}

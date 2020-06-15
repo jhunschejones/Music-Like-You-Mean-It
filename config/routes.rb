@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   post '/workshop_users', to: 'users#create_workshop_users'
 
   get '/unsubscribe', to: 'users#unsubscribe', as: :unsubscribe
-  post '/blogs/search', to: 'blogs#index', as: :blog_search
-  resources :users, only: [:index, :destroy]
+  resources :users, only: [:index, :new, :create, :destroy]
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
+
+  get '/blog', to: 'blogs#index' # old path from kajabi app
+  post '/blogs/search', to: 'blogs#index', as: :blog_search
 end

@@ -7,10 +7,21 @@ class UsersController < ApplicationController
     @users = User.where(site_role: User::SITE_USER)
   end
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    user = User.find_or_create_workshop_user(name: user_params[:name], email: user_params[:email])
+    user.just_created? ? flash[:success] = "User added" : flash[:notice] = "User already exists"
+    redirect_to new_user_path
+  end
+
   def unsubscribe
     @user = User.from_unsubscribe_key(params[:id])
     session[:user_id] = @user.id
   rescue
+    flash[:alert] = "Something went wrong! Please follow the unsubscribe link from your email again."
     redirect_to workshop_path
   end
 
@@ -27,18 +38,23 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(session[:user_id])
+    @user_to_delete = User.find(params[:id])
+    @authenticated_user = User.find(session[:user_id])
     secure_request!
+    @user_to_delete.destroy!
 
-    @user.destroy!
-    reset_session
-
-    flash[:notice] = "You have successfully unsubscribed."
-    redirect_to workshop_path
+    respond_to do |format|
+      format.js
+      format.html {
+        reset_session
+        flash[:notice] = "You have successfully unsubscribed."
+        redirect_to workshop_path
+      }
+    end
   rescue
-    if @user
+    if @authenticated_user
       flash[:alert] = "Something went wrong! Please try again."
-      redirect_to unsubscribe_path(id: @user.unsubscribe_key)
+      redirect_to unsubscribe_path(id: @authenticated_user.unsubscribe_key)
     else
       flash[:alert] = "Something went wrong! Please follow the unsubscribe link from your email again."
       redirect_to workshop_path
@@ -52,6 +68,8 @@ class UsersController < ApplicationController
   end
 
   def secure_request!
-    raise InsecureRequest unless params[:id].to_s == session[:user_id].to_s
+    unless @authenticated_user.is_admin? || (@user_to_delete == @authenticated_user)
+      raise InsecureRequest
+    end
   end
 end

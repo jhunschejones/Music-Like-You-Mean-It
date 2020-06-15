@@ -16,6 +16,10 @@ class User < ApplicationRecord
     site_role == SITE_ADMIN
   end
 
+  def just_created?
+    saved_change_to_attribute?(:id)
+  end
+
   def unsubscribe_key
     Rails.application.message_verifier(:unsubscribe).generate(id)
   end
