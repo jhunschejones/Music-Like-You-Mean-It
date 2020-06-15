@@ -6,6 +6,8 @@ class Blog < ApplicationRecord
 
   validates :title, presence: true
 
+  scope :published, -> { where('published_at < ?', Time.now) }
+
   before_save :format_named_url
 
   def id_for_url

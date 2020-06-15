@@ -1,40 +1,40 @@
 class BlogsController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   before_action :set_blog, only: [:show, :edit]
   skip_before_action :authenticate_admin_user, only: [:index, :show]
 
   def index
-    page = params[:page] || 1
-
     @blogs =
       if params[:tag].is_a? Array
         Blog.joins(:tags)
             .where("tags.text IN (?)", params[:tag])
-            .order({ published_at: :desc })
-            .with_rich_text_content
-            .paginate(page: page, per_page: 10)
             .distinct
       elsif  params[:tag]
         Blog.joins(:tags)
             .where("tags.text = ?", params[:tag])
-            .order({ published_at: :desc })
-            .with_rich_text_content
-            .paginate(page: page, per_page: 10)
             .distinct
       elsif params[:q]
         Blog.joins(:tags, :action_text_rich_text)
             .where("lower(action_text_rich_texts.body) LIKE ?", "%#{params[:q].strip.downcase}%")
-            .order({ published_at: :desc })
-            .with_rich_text_content
-            .paginate(page: page, per_page: 10)
+            .or(
+              Blog.joins(:tags, :action_text_rich_text)
+                  .where("lower(blogs.title) LIKE ?", "%#{params[:q].strip.downcase}%")
+            )
             .distinct
       else
         Blog.includes(:tags)
-            .order({ published_at: :desc })
-            .with_rich_text_content
-            .paginate(page: page, per_page: 10)
       end
+        .published
+        .order({ published_at: :desc })
+        .with_rich_text_content
+        .paginate(page: params[:page] || 1, per_page: 10)
 
-    flash[:success] = "You searched '#{params[:q]}'" if params[:q]
+    if params[:q] && @blogs.present?
+      flash.now[:success] = "#{pluralize(@blogs.size, 'result')} matching '#{params[:q].strip.downcase}'"
+    elsif params[:q]
+      flash.now[:notice] = "No blogs matched the phrase '#{params[:q].strip.downcase}'"
+    end
   end
 
   def show
