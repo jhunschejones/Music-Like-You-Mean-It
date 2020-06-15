@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_admin_user
-    @currrent_user = User.find_by(id: session[:user_id])
-    unless @currrent_user && @currrent_user.is_admin?
+    @current_user = User.find_by(id: session[:user_id])
+    unless @current_user && @current_user.is_admin?
       session[:return_to] ||= request.url
       redirect_to login_url, notice: "You do not have permission to access that page"
     end
