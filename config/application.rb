@@ -14,6 +14,9 @@ module MusicLikeYouMeanIt
     # Add all files in `/lib` directory to the load path for require statments
     config.autoload_paths += %W(#{Rails.root}/lib)
 
+    # Send errors through the router to use custom 404 and 500 pages
+    config.exceptions_app = self.routes
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'pages/terms' => :terms
     get 'pages/about' => :about
     get 'workshop' => :workshop
+    get 'error' => :error
   end
 
   post '/workshop_users', to: 'users#create_workshop_users'
@@ -23,4 +24,8 @@ Rails.application.routes.draw do
 
   get '/blog', to: 'blogs#index' # old path from kajabi app
   post '/blogs/search', to: 'blogs#index', as: :blog_search
+
+  %w( 404 422 500 503 ).each do |code|
+    get code, :to => "static_pages#error", :code => code
+  end
 end
