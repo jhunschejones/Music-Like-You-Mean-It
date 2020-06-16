@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# ====== Local development data instructions ======
+# 1. Import the production database dump for real site data
+# 2. Run rake db:seed to reset users and create local admin
+#
+User.destroy_all
+User.create(
+  name: "Josh Jones",
+  email: ENV["EMAIL_USERNAME"],
+  password: ENV["DEV_PASSWORD"],
+  password_confirmation: ENV["DEV_PASSWORD"],
+  site_role: "admin"
+)
