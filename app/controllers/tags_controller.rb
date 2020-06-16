@@ -1,7 +1,8 @@
 class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
-    @tag.delete
+    @tag.destroy
+    respond_to(&:js)
   end
 
   private
