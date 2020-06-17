@@ -16,16 +16,43 @@
       @media screen and (max-width: 500px) {
         padding: 0px 20px 20px 20px;
       }
+      img {
+        height: 28px;
+      }
     }
     a {
       color: hsl(217, 71%, 53%);
     }
-    .footer {
+    .cta-container {
+      margin-top: 16px;
+      .cta-button {
+        font-weight: 600;
+        background-color: #3273dc;
+        color: #fff;
+        cursor: pointer;
+        padding-bottom: calc(0.75em - 1px);
+        padding-left: 1.1em;
+        padding-right: 1.1em;
+        padding-top: calc(0.75em - 1px);
+        text-align: center;
+        white-space: nowrap;
+        line-height: 1.5;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        box-shadow: none;
+        text-decoration: none;
+      }
+    }
+    .email-footer {
       margin-top: 50px;
       padding: 0px;
       color: hsl(0, 0%, 71%);
       font-size: 0.75em;
       text-align: center;
+      p {
+        margin: 0;
+      }
     }
   }
 }

@@ -17,10 +17,9 @@
 
           <%= yield %>
 
-          <div class="footer">
-            <p>
-              Don't want to receive any more emails from musiclikeyoumeanit.com?&nbsp;&nbsp;<%= link_to("Unsubscribe", unsubscribe_url(id: @user.unsubscribe_key)) %>
-            </p>
+          <div class="email-footer">
+            <p><%= link_to("Unsubscribe", unsubscribe_url(id: @user.unsubscribe_key)) %> | Sent by Music Like You Mean It</p>
+            <p>6120 SW 18th Dr Apt 26 • Portland, Oregon • 97239-1992</p>
           </div>
         </div>
       </td>

@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :destroy]
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
+  resources :emails, except: [:delete]
 
   get '/blog', to: 'blogs#index' # old path from kajabi app
   post '/blogs/search', to: 'blogs#index', as: :blog_search
