@@ -9,6 +9,7 @@ gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 gem 'webpacker'
 gem 'turbolinks', '~> 5'
+gem 'newrelic_rpm'
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
