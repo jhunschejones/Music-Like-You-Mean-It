@@ -7,7 +7,9 @@
 mixing_snare:
   title: How to mix snare drum
   published_at: <%= 5.days.ago %>
+  is_draft: false
 
 mixing_kick:
   title: How to mix kick drum
   published_at: <%= 8.days.ago %>
+  is_draft: false

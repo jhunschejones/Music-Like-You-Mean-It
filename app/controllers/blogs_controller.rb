@@ -5,6 +5,11 @@ class BlogsController < ApplicationController
   skip_before_action :authenticate_admin_user, only: [:index, :show]
 
   def index
+    if @current_user&.can_manage_blogs?
+      @blogs = Blog.includes(:tags).with_rich_text_content.order({ published_at: :desc })
+      return render :admin
+    end
+
     @blogs =
       if params[:tag].is_a? Array
         Blog.joins(:tags)
@@ -38,6 +43,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    redirect_to blogs_path if @blog.is_draft? && !@current_user&.can_manage_blogs?
   end
 
   def new
@@ -72,7 +78,7 @@ class BlogsController < ApplicationController
       end
     end
 
-    redirect_to blogs_path
+    redirect_to blog_path(@blog)
   end
 
   private
@@ -84,9 +90,11 @@ class BlogsController < ApplicationController
       else
         Blog.includes(:tags).where(named_url: params[:id]).first
       end
+
+    raise ActiveRecord::RecordNotFound unless @blog
   end
 
   def blogs_params
-    params.require(:blog).permit(:title, :embedded_video, :published_at, :content, :named_url, :blog_tags, tag_attributes: [:text, :blog_id])
+    params.require(:blog).permit(:title, :embedded_video, :published_at, :content, :named_url, :is_draft, :blog_tags, tag_attributes: [:text, :blog_id])
   end
 end
