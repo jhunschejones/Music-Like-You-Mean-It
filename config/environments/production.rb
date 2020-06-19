@@ -67,8 +67,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # ENABLE EMAILS IN PRODUCTION:
-  config.action_mailer.asset_host = 'https://music-like-you-mean-it.herokuapp.com'
-  config.action_mailer.default_url_options = { host: 'music-like-you-mean-it.herokuapp.com', protocol: 'https' }
+  config.action_mailer.asset_host = 'https://www.musiclikeyoumeanit.com'
+  config.action_mailer.default_url_options = { host: 'www.musiclikeyoumeanit.com', protocol: 'https' }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = { from: 'Music Like You Mean It' }
