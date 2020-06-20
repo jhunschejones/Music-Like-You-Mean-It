@@ -16,7 +16,17 @@ body {
 .navbar,
 .navbar-brand,
 .navbar-burger {
-  height: 70px;
+  // entire menu height
+  height: 64px;
+  .site-logo-image {
+    margin-left: 12px;
+    height: 22px;
+  }
+  // bigger burger lines
+  span {
+    left: calc(50% - 10px);
+    width: 20px;
+  }
 }
 
 .flash {

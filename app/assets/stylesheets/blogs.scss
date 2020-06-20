@@ -1,16 +1,53 @@
 .new-blog,
 .edit-blog {
   padding: 12px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
+  .new-blog-form-container,
+  .edit-blog-form-container {
+    width: 100%;
+    max-width: 700px;
+    .title {
+      font-weight: normal;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    input[type=checkbox] {
+      transform: scale(1.1);
+      margin: 0px 5px;
+    }
+    .edit-tags-heading {
+      margin-top: 22px;
+      margin-bottom: 6px;
+      padding-left: 1px;
+    }
+    .tags {
+      padding-left: 1px;
+      display: block;
+    }
+    input[name='blog[tag][text]'] {
+      margin-bottom: -12px;
+    }
+    .actions {
+      padding-top: 10px;
+    }
+  }
+}
+
+.blogs-admin-container {
+  padding: 12px;
+  margin-top: 12px;
   .title {
-    font-weight: normal;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
-  .actions {
-    padding-top: 10px;
+  .new-blog-button {
+    margin-top: -40px;
   }
-  .tags {
-    display: block;
+  @media screen and (max-width: 680px) {
+    .table td, .table th {
+      padding: 8px;
+    }
   }
 }
 
@@ -32,6 +69,7 @@
         margin-bottom: 5px;
       }
       @media screen and (max-width: 680px) {
+        margin-top: 2px;
         .blog-title {
           font-size: 30px;
         }
@@ -116,7 +154,10 @@
 }
 
 .blog-details {
-  margin-bottom: 24px;
+  margin-bottom: 2px;
+  @media screen and (min-width: 680px) {
+    margin-bottom: 24px;
+  }
   .blog-container {
     padding: 12px;
     display: flex;
@@ -132,7 +173,11 @@
         font-weight: 500;
         margin-bottom: 5px;
       }
+      .edit-blog-link {
+        padding: 6px 0px;
+      }
       @media screen and (max-width: 680px) {
+        margin-top: 2px;
         .blog-title {
           font-size: 30px;
         }
@@ -200,6 +245,7 @@
         background-color: white;
         align-content: center;
         .author-image {
+          margin: 6px 0px 2px 0px;
           height: 128px;
           border-radius: 200px;
         }
