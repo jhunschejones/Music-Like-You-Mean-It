@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       redirect_to login_url
     else
       session[:user_id] = user.id
-      WorkshopMailer.welcome_email(user.id).deliver_later
+      UserMailer.workshop_email(user.id).deliver_later
       redirect_to workshop_path
     end
   end
