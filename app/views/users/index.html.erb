@@ -1,21 +1,25 @@
 <div class="all-users">
   <div class="all-users-container">
-    <br/>
     <h2 class="title is-4">All site users</h1>
-    <p class="has-text-grey-light">Total: <%= @users.size %></p>
+    <%= link_to(new_user_path, class: "button is-info is-pulled-right is-small new-user-button") do %>
+      <span class="icon is-small">
+        <i class="fas fa-pen"></i>
+      </span>
+      <span>Add a user</span>
+    <% end %>
+    <p class="has-text-grey-light users-total">Total: <%= @users.size %></p>
     <table class="table is-fullwidth is-hoverable">
       <thead>
         <tr>
           <th>Name</th>
           <th>Email</th>
-          <th>Joined on</th>
+          <th>Joined</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        <%= render(@users) %>
+        <%= render(partial: 'users/user', collection: @users, cached: true) %>
       </tbody>
     </table>
-    <%= link_to("Add a user", new_user_path, class: "button is-info") %>
   </div>
 </div>

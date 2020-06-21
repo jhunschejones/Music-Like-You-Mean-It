@@ -1,6 +1,5 @@
-<div class="all-emails-container">
-  <div class="all-emails">
-    <br/>
+<div class="all-emails">
+  <div class="all-emails-container">
     <h2 class="title is-4">All emails</h1>
     <%= link_to(new_email_path, class: "button is-info is-pulled-right is-small new-email-button") do %>
       <span class="icon is-small">
@@ -17,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render(@emails) %>
+        <%= render(partial: 'emails/email', collection: @emails, cached: true) %>
       </tbody>
     </table>
   </div>
