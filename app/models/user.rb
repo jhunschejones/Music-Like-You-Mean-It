@@ -16,6 +16,18 @@ class User < ApplicationRecord
     site_role == SITE_ADMIN
   end
 
+  def can_manage_users?
+    is_admin?
+  end
+
+  def can_manage_emails?
+    is_admin?
+  end
+
+  def can_manage_blogs?
+    is_admin?
+  end
+
   def just_created?
     saved_change_to_attribute?(:id)
   end
