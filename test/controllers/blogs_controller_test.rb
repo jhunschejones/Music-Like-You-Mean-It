@@ -14,6 +14,30 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to login_path
       end
 
+      test "user is blocked from the blogs admin page" do
+        get blogs_path
+        assert_response :success
+        assert_select "h2.title", { text: /All blogs/, count: 0 }, "User should not be able to access blogs admin page"
+      end
+
+      test "user is blocked from seeing draft blog" do
+        blogs(:mixing_snare).update(is_draft: true)
+        get blog_path(blogs(:mixing_snare))
+        assert_redirected_to blogs_path
+      end
+
+      test "user can view blogs" do
+        get blogs_path
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
+      end
+
+      test "user can view blog" do
+        get blog_path(blogs(:mixing_snare))
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
+      end
+
       test "user is blocked from creating blogs" do
         assert_no_difference 'Blog.count' do
           post blogs_path, params: { blog: { title: "My New Blog" } }
@@ -44,6 +68,30 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to login_path
       end
 
+      test "user is blocked from the blogs admin page" do
+        get blogs_path
+        assert_response :success
+        assert_select "h2.title", { text: /All blogs/, count: 0 }, "User should not be able to access blogs admin page"
+      end
+
+      test "user is blocked from seeing draft blog" do
+        blogs(:mixing_snare).update(is_draft: true)
+        get blog_path(blogs(:mixing_snare))
+        assert_redirected_to blogs_path
+      end
+
+      test "user can view blogs" do
+        get blogs_path
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
+      end
+
+      test "user can view blog" do
+        get blog_path(blogs(:mixing_snare))
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
+      end
+
       test "user is blocked from creating blogs" do
         assert_no_difference 'Blog.count' do
           post blogs_path, params: { blog: { title: "My New Blog" } }
@@ -67,13 +115,32 @@ class BlogsControllerTest < ActionDispatch::IntegrationTest
       test "user can access new blog page" do
         get new_blog_path
         assert_response :success
-        assert_select "h2.title", "New blog:"
+        assert_select "h2.title", "New blog"
       end
 
       test "user can access edit blog page" do
         get edit_blog_path(blogs(:mixing_snare))
         assert_response :success
         assert_select 'form input[name="blog[title]"][value=?]', blogs(:mixing_snare).title
+      end
+
+      test "user can access blogs admin page" do
+        get blogs_path
+        assert_response :success
+        assert_select "h2.title", /All blogs/
+      end
+
+      test "user can access draft blogs" do
+        blogs(:mixing_snare).update(is_draft: true)
+        get blog_path(blogs(:mixing_snare))
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
+      end
+
+      test "user can view blog" do
+        get blog_path(blogs(:mixing_snare))
+        assert_response :success
+        assert_select "h2.title", blogs(:mixing_snare).title
       end
 
       test "user can create blogs" do
