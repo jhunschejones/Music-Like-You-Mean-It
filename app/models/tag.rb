@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  belongs_to :blog
+  belongs_to :blog, touch: true
 
   validates :text, presence: true
 
