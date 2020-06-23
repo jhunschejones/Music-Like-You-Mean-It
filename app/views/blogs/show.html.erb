@@ -1,7 +1,20 @@
 <div class="blog-details">
   <div class="blog-container">
     <div class="blog">
+      <% if @current_user&.can_manage_blogs? && @blog.is_draft? %>
+        <p class="tag is-danger is-pulled-right">DRAFT</p>
+      <% end %>
       <h2 class="blog-title title is-1"><%= @blog.title %></h2>
+      <% if @current_user&.can_manage_blogs? %>
+        <div class="edit-blog-link">
+          <%= link_to(edit_blog_path(@blog), class: "button is-warning is-small") do %>
+            <span class="icon is-small">
+              <i class="fas fa-pen"></i>
+            </span>
+            <span>Edit</span>
+          <% end %>
+        </div>
+      <% end %>
       <div class="has-text-grey sub-header">
         <% if @blog.tags.size > 0 %>
           <div class="tags">
