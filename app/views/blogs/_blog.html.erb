@@ -21,7 +21,9 @@
       <%= raw blog.embedded_video %>
     </div>
     <div class="blog-content">
-      <%= blog.content %>
+      <div class="trix-content">
+        <%= raw(truncate_after_two_paragraphs(blog.content)) %>
+      </div>
     </div>
     <div class="blog-details-link">
       <%= link_to("Continue reading...", blog_path(id: blog.id_for_url), class: "has-text-link") %>
