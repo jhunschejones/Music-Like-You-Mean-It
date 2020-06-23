@@ -39,7 +39,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       test "user can access the users page" do
         get users_path
         assert_response :success
-        assert_select "h2", "All site users"
+        assert_select "h2", /All site users/
       end
 
       test "user can access new users page" do

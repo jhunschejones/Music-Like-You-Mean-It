@@ -30,6 +30,12 @@ class EmailsController < ApplicationController
     respond_to(&:js)
   end
 
+  def test_email
+    UserMailer.daily_email(email_id: @email.id, user_id: @current_user.id).deliver_later
+    flash[:success] = "Test email enqueued"
+    redirect_to email_path(@email)
+  end
+
   private
 
   def set_email

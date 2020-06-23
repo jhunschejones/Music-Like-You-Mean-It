@@ -24,6 +24,12 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to login_path
       end
 
+      test "user is blocked from the test email page" do
+        UserMailer.expects(:daily_email).never()
+        get test_email_path(emails(:draft))
+        assert_redirected_to login_path
+      end
+
       test "user is blocked from creating emails" do
         assert_no_difference 'Email.count' do
           post emails_path, params: { email: { subject: "My New Email" } }
@@ -68,6 +74,12 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
 
       test "user is blocked from the edit email page" do
         get edit_email_path(emails(:draft))
+        assert_redirected_to login_path
+      end
+
+      test "user is blocked from the test email page" do
+        UserMailer.expects(:daily_email).never()
+        get test_email_path(emails(:draft))
         assert_redirected_to login_path
       end
 
@@ -120,6 +132,17 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         get edit_email_path(emails(:draft))
         assert_response :success
         assert_select 'form input[name="email[subject]"][value=?]', emails(:draft).subject
+      end
+
+      test "user can send test email" do
+        test_job = mock()
+        test_job.stubs(:deliver_later)
+        UserMailer.expects(:daily_email)
+                  .with(email_id: emails(:draft).id, user_id: users(:site_admin).id)
+                  .returns(test_job)
+
+        get test_email_path(emails(:draft))
+        assert_redirected_to email_path(emails(:draft))
       end
 
       test "user can create emails" do
