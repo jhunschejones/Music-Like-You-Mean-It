@@ -1,6 +1,18 @@
 .new-workshop-user {
+  background-image: asset_url("workshop_background_origional.jpg");
+  @media screen and (max-width: 2160px) {
+    background-image: asset_url("workshop_background_2160w.jpg");
+  }
+  @media screen and (max-width: 1080px) {
+    background-image: asset_url("workshop_background_1080w.jpg");
+  }
+  @media screen and (max-width: 720px) {
+    background-image: asset_url("workshop_background_720w.jpg");
+  }
+  @media screen and (max-width: 480px) {
+    background-image: asset_url("workshop_background_480w.jpg");
+  }
   min-height: 84vh;
-  background-image: asset_url("workshop_background.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

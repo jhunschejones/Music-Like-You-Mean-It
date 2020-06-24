@@ -14,6 +14,9 @@ module MusicLikeYouMeanIt
     # Add all files in `/lib` directory to the load path for require statments
     config.autoload_paths += %W(#{Rails.root}/lib)
 
+    # https://thoughtbot.com/blog/content-compression-with-rack-deflater
+    config.middleware.use Rack::Deflater
+
     # Send errors through the router to use custom 404 and 500 pages
     config.exceptions_app = self.routes
 
