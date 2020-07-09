@@ -11,6 +11,7 @@ gem 'closure-compiler'
 gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'newrelic_rpm'
+gem 'rack-attack'
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
