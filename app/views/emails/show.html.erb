@@ -16,6 +16,14 @@
         <span>Subject: </span>
         <span class="has-text-grey"><%= @email.subject %></span>
       </p>
+        <p>
+          <% if @email.sent_at > Time.now || @email.is_draft? %>
+            <span>Send: </span>
+          <% else %>
+              <span>Sent: </span>
+          <% end %>
+          <span class="has-text-grey"><%= @email.sent_at.localtime.strftime("%B %-d, %Y") %></span>
+        </p>
     </div>
   </div>
 
