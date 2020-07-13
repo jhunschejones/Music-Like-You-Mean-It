@@ -1,10 +1,10 @@
 class UserMailer < ApplicationMailer
-  def daily_email(email_id:, user_id:)
+  def daily_email(email_id:, user_id:, is_test: false)
     @user = User.find(user_id)
     @email = Email.find(email_id)
     mail(
       to: @user.email,
-      subject: @email.subject
+      subject: is_test ? "TEST #{@email.subject}" : @email.subject
     )
   end
 

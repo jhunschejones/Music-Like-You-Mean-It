@@ -138,7 +138,7 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         test_job = mock()
         test_job.stubs(:deliver_later)
         UserMailer.expects(:daily_email)
-                  .with(email_id: emails(:draft).id, user_id: users(:site_admin).id)
+                  .with(email_id: emails(:draft).id, user_id: users(:site_admin).id, is_test: true)
                   .returns(test_job)
 
         get test_email_path(emails(:draft))
