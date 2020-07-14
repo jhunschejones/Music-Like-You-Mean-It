@@ -4,7 +4,23 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
+
+ready_to_send:
+  subject: "This email is ready to send"
+  sent_at: <%= Time.now %>
+  is_draft: false
+
 draft:
-  subject: "The first email"
+  subject: "The first draft email"
   sent_at: <%= Time.now %>
   is_draft: true
+
+already_sent:
+  subject: "This email was already sent"
+  sent_at: <%= Time.now - 1.day %>
+  is_draft: false
+
+future:
+  subject: "This email will be sent tomorrow"
+  sent_at: <%= Time.now + 1.day %>
+  is_draft: false

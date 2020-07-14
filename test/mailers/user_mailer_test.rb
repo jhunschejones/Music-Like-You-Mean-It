@@ -1,5 +1,6 @@
 require 'test_helper'
 
+# bundle exec ruby -Itest test/mailers/user_mailer_test.rb
 class UserMailerTest < ActionMailer::TestCase
   describe "#daily_email" do
     test "uses correct format for test email" do

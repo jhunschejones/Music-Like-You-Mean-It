@@ -2,37 +2,45 @@ require 'test_helper'
 
 # bundle exec ruby -Itest test/jobs/send_daily_email_job_test.rb
 class SendDailyEmailJobTest < ActiveJob::TestCase
+  before do
+    @test_job = mock()
+    @test_job.stubs(:deliver_later)
+
+    for_each_user do |user_id|
+      UserMailer.expects(:daily_email)
+                .with(email_id: emails(:ready_to_send).id, user_id: user_id)
+                .returns(@test_job)
+    end
+  end
+
   test "does not equeue draft emails" do
-    UserMailer.expects(:daily_email).never()
+    for_each_user do |user_id|
+      UserMailer.expects(:daily_email)
+                .with(email_id: emails(:draft).id, user_id: user_id)
+                .never()
+    end
+
     SendDailyEmailJob.perform_now
   end
 
-  describe "when email is not a draft" do
-    before do
-      emails(:draft).update(is_draft: false)
+  test "does not enqueue future emails" do
+    for_each_user do |user_id|
+      UserMailer.expects(:daily_email)
+                .with(email_id: emails(:future).id, user_id: user_id)
+                .never()
     end
 
-    test "does not enqueue future emails" do
-      emails(:draft).update(sent_at: Time.now + 1.day)
-      UserMailer.expects(:daily_email).never()
-      SendDailyEmailJob.perform_now
-    end
+    SendDailyEmailJob.perform_now
+  end
 
-    test "enqueues emails ready for delivery" do
-      test_job = mock()
-      test_job.stubs(:deliver_later)
+  test "enqueues emails ready for delivery" do
+    @test_job.expects(:deliver_later).times(2)
+    SendDailyEmailJob.perform_now
+  end
 
-      UserMailer.expects(:daily_email)
-                .with(email_id: emails(:draft).id, user_id: users(:site_admin).id)
-                .returns(test_job)
-
-      UserMailer.expects(:daily_email)
-                .with(email_id: emails(:draft).id, user_id: users(:site_user).id)
-                .returns(test_job)
-
-      test_job.expects(:deliver_later).times(2)
-
-      SendDailyEmailJob.perform_now
+  def for_each_user
+    User.all.pluck(:id).each do |user_id|
+      yield(user_id)
     end
   end
 end
