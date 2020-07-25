@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_admin_user, only: [:create_workshop_users, :unsubscribe, :destroy]
 
   def index
-    @users = User.where(site_role: User::SITE_USER)
+    @users = User.where(site_role: User::SITE_USER).order({ created_at: :desc })
   end
 
   def new

@@ -21,6 +21,15 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
         assert_response :success
         assert_select "h2.workshop-title"
       end
+
+      test "increments workshop_page_views for the user" do
+        riley = User.where(email: "riley@dafox.com").first
+
+        assert_equal 0, riley.workshop_page_views
+        get workshop_path
+        riley.reload
+        assert_equal 1, riley.workshop_page_views
+      end
     end
   end
 end
