@@ -131,7 +131,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
-    premailer (1.12.1)
+    premailer (1.13.1)
       addressable
       css_parser (>= 1.6.0)
       htmlentities (>= 4.0.0)
