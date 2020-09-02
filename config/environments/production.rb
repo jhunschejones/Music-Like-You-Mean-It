@@ -49,7 +49,7 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  config.session_store :cookie_store, key: "__Host-music_like_you_mean_it_session", secure: true # same_site: :secure
+  config.session_store :cookie_store, expire_after: 14.days, key: "__Host-music_like_you_mean_it_session", secure: Rails.env.production?
 
   config.log_level = :info
 
