@@ -32,6 +32,7 @@ development:
   <<: *default_settings
   # Don't monitor by default when running in local development
   monitor_mode: false
+  app_name: Music Like You Mean It (development)
 
 test:
   <<: *default_settings
@@ -44,4 +45,4 @@ staging:
 production:
   <<: *default_settings
   ​browser_monitoring:
-    ​auto_instrument: true
+    ​auto_instrument: false
