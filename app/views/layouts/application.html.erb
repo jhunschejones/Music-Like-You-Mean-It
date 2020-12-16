@@ -9,12 +9,9 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <% unless ::NewRelic::Agent.browser_timing_header.blank? %>
-      <%= javascript_tag nonce: true do -%>
-        <%= ::NewRelic::Agent.browser_timing_header.gsub!("<script>", "").gsub!("</script>", "") %>
-      <% end -%>
-    <% end %>
     <%= favicon_link_tag asset_path('favicon.ico') %>
+
+    <%= ::NewRelic::Agent.browser_timing_header.scan(/<script>(.*?)<\/script>/).flatten.map { |h| javascript_tag h, nonce: true }.join.html_safe %>
   </head>
 
   <body>
