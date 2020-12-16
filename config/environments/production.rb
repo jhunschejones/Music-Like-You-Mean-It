@@ -51,6 +51,8 @@ Rails.application.configure do
 
   config.session_store :cookie_store, expire_after: 14.days, key: "__Host-music_like_you_mean_it_session", secure: Rails.env.production?
 
+  config.action_dispatch.cookies_same_site_protection = :strict
+
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
