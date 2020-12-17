@@ -10,9 +10,11 @@ if Rails.env.production?
     policy.font_src    :self, :https, :data
     policy.img_src     :self, :https, :data
     policy.object_src  :none
-    policy.script_src  :self, "https://js-agent.newrelic.com"
+    policy.script_src  :self, "https://js-agent.newrelic.com", "https://bam.nr-data.net"
     policy.style_src   :self
+    # https://docs.newrelic.com/docs/browser/new-relic-browser/getting-started/compatibility-requirements-browser-monitoring
     policy.connect_src :self, "https://bam.nr-data.net", "https://bam-cell.nr-data.net"
+
     # If you are using webpack-dev-server then specify webpack-dev-server host
     # policy.connect_src :self, :https, "http://localhost:3035", "ws://localhost:3035"
 
