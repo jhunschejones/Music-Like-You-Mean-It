@@ -31,3 +31,17 @@ document.addEventListener("turbolinks:request-start", (event) => {
     xhr.setRequestHeader("X-Turbolinks-Nonce", cspHeader.content);
   }
 });
+
+document.addEventListener("turbolinks:before-cache", () => {
+  const styleTags = document.querySelectorAll("style");
+  const scriptTags = document.querySelectorAll("script");
+  const pageNonce = document.querySelector("meta[name='csp-nonce']") as HTMLMetaElement;
+  if (pageNonce) {
+    if (styleTags) {
+      styleTags.forEach(tag => { tag.nonce = pageNonce.content; });
+    }
+    if (scriptTags) {
+      scriptTags.forEach(tag => { tag.nonce = pageNonce.content; });
+    }
+  }
+});
