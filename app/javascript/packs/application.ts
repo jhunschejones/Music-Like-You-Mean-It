@@ -47,4 +47,9 @@ document.addEventListener("turbolinks:before-cache", () => {
 
   // Close the menu before Turbolinks caches the page
   new MenuHamburger(document.querySelector(".navbar-burger"));
+
+  // Do not cache the NR browser agent
+  document.querySelectorAll(".nr-browser-agent").forEach((nrAgent) => {
+    nrAgent.parentNode.removeChild(nrAgent);
+  });
 });
