@@ -5,6 +5,9 @@ export default class MenuHamburger {
   constructor(hamburger: HTMLElement) {
     this.hamburger = hamburger;
     this.menu = document.querySelector(".main-nav-menu") as HTMLElement;
+    // make sure menu is closed by default on page load
+    this.menu.classList.remove("is-active");
+    this.hamburger.classList.remove("is-active");
   }
 
   initHandlers(): void {

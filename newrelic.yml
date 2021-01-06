@@ -47,4 +47,4 @@ production:
   ​browser_monitoring:
     # https://docs.newrelic.com/docs/agents/ruby-agent/features/new-relic-browser-ruby-agent
     # https://docs.newrelic.com/docs/agents/ruby-agent/configuration/ruby-agent-configuration#browser_monitoring
-    # ​auto_instrument: false
+    ​auto_instrument: true
