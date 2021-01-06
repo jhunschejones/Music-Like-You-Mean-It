@@ -25,10 +25,10 @@ document.addEventListener("turbolinks:load", () => {
 
 // https://github.com/turbolinks/turbolinks/issues/430
 document.addEventListener("turbolinks:request-start", (event) => {
-  const cspHeader = document.querySelector("meta[name='csp-nonce']") as HTMLMetaElement;
-  if (cspHeader != null) {
+  const pageNonce = document.querySelector("meta[name='csp-nonce']") as HTMLMetaElement;
+  if (pageNonce != null) {
     const xhr = event.data.xhr;
-    xhr.setRequestHeader("X-Turbolinks-Nonce", cspHeader.content);
+    xhr.setRequestHeader("X-Turbolinks-Nonce", pageNonce.content);
   }
 });
 
