@@ -44,4 +44,7 @@ document.addEventListener("turbolinks:before-cache", () => {
       scriptTags.forEach(tag => { tag.nonce = pageNonce.content; });
     }
   }
+
+  // Close the menu before Turbolinks caches the page
+  new MenuHamburger(document.querySelector(".navbar-burger"));
 });
