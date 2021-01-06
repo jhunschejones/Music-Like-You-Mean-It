@@ -36,7 +36,7 @@ document.addEventListener("turbolinks:before-cache", () => {
   const styleTags = document.querySelectorAll("style");
   const scriptTags = document.querySelectorAll("script");
   const pageNonce = document.querySelector("meta[name='csp-nonce']") as HTMLMetaElement;
-  if (pageNonce) {
+  if (pageNonce != null) {
     if (styleTags) {
       styleTags.forEach(tag => { tag.nonce = pageNonce.content; });
     }
