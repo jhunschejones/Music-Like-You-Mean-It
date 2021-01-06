@@ -32,17 +32,17 @@ end
 # Rails.application.config.content_security_policy_nonce_generator = -> request { SecureRandom.base64(16) }
 
 # https://github.com/turbolinks/turbolinks/issues/430
-# Rails.application.config.content_security_policy_nonce_generator = -> (request) do
-#   # use the same csp nonce for turbolinks requests
-#   if request.env['HTTP_TURBOLINKS_REFERRER'].present?
-#     request.env['HTTP_X_TURBOLINKS_NONCE']
-#   else
-#     SecureRandom.base64(16)
-#   end
-# end
+Rails.application.config.content_security_policy_nonce_generator = -> (request) do
+  # use the same csp nonce for turbolinks requests
+  if request.env['HTTP_TURBOLINKS_REFERRER'].present?
+    request.env['HTTP_X_TURBOLINKS_NONCE']
+  else
+    SecureRandom.base64(16)
+  end
+end
 
 # Set the nonce only to specific directives
-# Rails.application.config.content_security_policy_nonce_directives = %w(script-src)
+Rails.application.config.content_security_policy_nonce_directives = %w(script-src)
 
 # Report CSP violations to a specified URI
 # For further information see the following documentation:
