@@ -85,6 +85,10 @@
   }
   .new-email-button,
   .send-daily-email-button {
+    .fa-spinner {
+      margin-right: 5px;
+      margin-left: -4px;
+    }
     margin-top: -40px;
     .large-screen-description {
       @media screen and (max-width: 680px) {
