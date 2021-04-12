@@ -83,8 +83,20 @@
   .title {
     margin-bottom: 8px;
   }
-  .new-email-button {
+  .new-email-button,
+  .send-daily-email-button {
     margin-top: -40px;
+    .large-screen-description {
+      @media screen and (max-width: 680px) {
+        display: none;
+      }
+    }
+  }
+  .send-daily-email-button {
+    margin-right: 105px;
+    @media screen and (max-width: 680px) {
+      margin-right: 70px;
+    }
   }
   @media screen and (max-width: 680px) {
     .table td, .table th {

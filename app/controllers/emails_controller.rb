@@ -1,5 +1,5 @@
 class EmailsController < ApplicationController
-  before_action :set_email, except: [:index, :new, :create]
+  before_action :set_email, except: [:index, :new, :create, :send_daily_email]
 
   def index
     @emails = Email.order({ sent_at: :desc })
@@ -39,6 +39,12 @@ class EmailsController < ApplicationController
 
     flash[:success] = "Test email enqueued"
     redirect_to email_path(@email)
+  end
+
+  def send_daily_email
+    SendDailyEmailJob.perform_later
+    flash[:success] = "Daily emails enqueued"
+    redirect_to emails_path
   end
 
   private

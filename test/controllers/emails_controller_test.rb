@@ -24,9 +24,15 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to login_path
       end
 
-      test "user is blocked from the test email page" do
-        UserMailer.expects(:daily_email).never()
+      test "user is blocked from the test email action" do
+        UserMailer.expects(:daily_email).never
         get test_email_path(emails(:draft))
+        assert_redirected_to login_path
+      end
+
+      test "user is blocked from the send daily emails action" do
+        SendDailyEmailJob.expects(:perform_later).never
+        post send_daily_email_emails_path
         assert_redirected_to login_path
       end
 
@@ -77,9 +83,15 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
         assert_redirected_to login_path
       end
 
-      test "user is blocked from the test email page" do
-        UserMailer.expects(:daily_email).never()
+      test "user is blocked from the test email action" do
+        UserMailer.expects(:daily_email).never
         get test_email_path(emails(:draft))
+        assert_redirected_to login_path
+      end
+
+      test "user is blocked from the send daily emails action" do
+        SendDailyEmailJob.expects(:perform_later).never
+        post send_daily_email_emails_path
         assert_redirected_to login_path
       end
 
@@ -143,6 +155,13 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
 
         get test_email_path(emails(:draft))
         assert_redirected_to email_path(emails(:draft))
+      end
+
+      test "user can send daily emails" do
+        SendDailyEmailJob.expects(:perform_later).once
+        post send_daily_email_emails_path
+        assert_redirected_to emails_path
+        assert_equal "Daily emails enqueued", flash[:success]
       end
 
       test "user can create emails" do

@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :new, :create, :destroy]
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
-  resources :emails, except: [:delete]
+  resources :emails, except: [:delete] do
+    collection do
+      post :send_daily_email
+    end
+  end
   get '/emails/:id/send_test_email', to: 'emails#test_email', as: :test_email
 
   get '/blog', to: 'blogs#index' # old path from kajabi app
