@@ -15,7 +15,7 @@ gem 'rack-attack'
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
-gem 'mailgun-ruby', git: 'https://github.com/mailgun/mailgun-ruby/', tag: 'v1.2.2'
+gem 'mailgun-ruby'
 gem 'premailer-rails'
 
 gem 'bcrypt'
