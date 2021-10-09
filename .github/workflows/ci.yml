@@ -30,12 +30,8 @@ jobs:
       with:
         ruby-version: '2.7.2'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Install dependent libraries
+    - name: Install dependent libraries for postgres
       run: sudo apt-get install libpq-dev
-    - name: Bundle install
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
     - name: Setup Database
       run: bundle exec rake db:create db:migrate
       env:
