@@ -1,5 +1,7 @@
 # Music Like You Mean It
 
+[![CI](https://github.com/jhunschejones/Music-Like-You-Mean-It/actions/workflows/ci.yml/badge.svg)](https://github.com/jhunschejones/Music-Like-You-Mean-It/actions/workflows/ci.yml)
+
 ## Overview
 Music Like You Mean It is a Rails 6 web app that I use to deliver online music production training content.
 
