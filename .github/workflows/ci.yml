@@ -36,6 +36,8 @@ jobs:
       run: bundle exec rake db:create db:migrate
       env:
         RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
