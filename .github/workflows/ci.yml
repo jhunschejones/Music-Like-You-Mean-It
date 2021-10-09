@@ -1,0 +1,57 @@
+# This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    strategy:
+      matrix:
+        ruby-version: ['2.6', '2.7', '3.0']
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Install dependent libraries
+      run: sudo apt-get install libpq-dev
+    - name: Bundle install
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+    - name: Setup Database
+      run: bundle exec rake db:create db:migrate
+      env:
+        RAILS_ENV: test
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '15'
+        cache: 'yarn'
+    - name: Install with yarn
+      run: yarn install
+    - name: Run tests
+      run: bundle exec rails test
+      env:
+        LOCKBOX_MASTER_KEY: ${{ secrets.LOCKBOX_MASTER_KEY }}
+        BLIND_INDEX_MASTER_KEY: ${{ secrets.BLIND_INDEX_MASTER_KEY }}
