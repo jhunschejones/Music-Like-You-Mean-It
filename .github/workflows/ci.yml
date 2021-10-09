@@ -50,3 +50,5 @@ jobs:
       env:
         LOCKBOX_MASTER_KEY: ${{ secrets.LOCKBOX_MASTER_KEY }}
         BLIND_INDEX_MASTER_KEY: ${{ secrets.BLIND_INDEX_MASTER_KEY }}
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
