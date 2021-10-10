@@ -202,6 +202,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.5)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -289,6 +290,7 @@ DEPENDENCIES
   rack-attack
   rails (~> 6.1.0)
   redis (~> 4.0)
+  rexml
   sass-rails (>= 6)
   selenium-webdriver
   sidekiq
@@ -301,7 +303,7 @@ DEPENDENCIES
   will_paginate
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   1.17.3
+   2.2.29

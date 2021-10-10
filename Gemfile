@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.0.2'
 
 gem 'rails', '~> 6.1.0'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -12,6 +12,7 @@ gem 'webpacker'
 gem 'turbolinks', '~> 5'
 gem 'newrelic_rpm'
 gem 'rack-attack'
+gem 'rexml' # no longer included in Ruby 3.x, some gems use this but have not listed it as a dependency yet
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
