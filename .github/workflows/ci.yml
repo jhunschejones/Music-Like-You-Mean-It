@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:11
+        image: postgres:13
         ports:
           - 5432:5432
         env:
@@ -41,7 +41,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
-        node-version: '15'
+        node-version: '16'
         cache: 'yarn'
     - name: Install with yarn
       run: yarn install
