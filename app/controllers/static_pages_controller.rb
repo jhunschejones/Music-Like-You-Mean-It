@@ -14,14 +14,14 @@ class StaticPagesController < ApplicationController
     @current_user = User.find(session[:user_id])
     @current_user.increment!(:workshop_page_views)
   rescue ActiveRecord::RecordNotFound
-    render 'users/new_workshop_user'
+    render "users/new_workshop_user"
   end
 
   def error
-    if params[:code] == '404'
-      render '404', status: 404
+    if params[:code] == "404"
+      render "404", status: 404
     else
-      render '500', status: 500
+      render "500", status: 500
     end
   end
 end

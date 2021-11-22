@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 # bundle exec ruby -Itest test/models/user_test.rb
 class UserTest < ActiveSupport::TestCase
@@ -11,7 +11,7 @@ class UserTest < ActiveSupport::TestCase
       site_role: "wizzard"
     )
     user.validate
-    expected_errors = {:site_role=>["not included in '[\"user\", \"admin\"]'"]}
+    expected_errors = { site_role: ["not included in '[\"user\", \"admin\"]'"] }
     assert_equal(expected_errors, user.errors.messages)
   end
 end

@@ -1,11 +1,11 @@
-require 'test_helper'
+require "test_helper"
 
 # bundle exec ruby -Itest test/controllers/tags_controller_test.rb
 class TagsControllerTest < ActionDispatch::IntegrationTest
   describe "admin authentication" do
     describe "when no user is logged in" do
       test "user is blocked from deleting tags" do
-        assert_no_difference 'Tag.count' do
+        assert_no_difference "Tag.count" do
           delete tag_path(tags(:mixing_1), format: :js)
         end
         assert_redirected_to login_path
@@ -18,7 +18,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "user is blocked from deleting tags" do
-        assert_no_difference 'Tag.count' do
+        assert_no_difference "Tag.count" do
           delete tag_path(tags(:mixing_1), format: :js)
         end
         assert_redirected_to login_path
@@ -31,7 +31,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
       end
 
       test "user is blocked from deleting tags" do
-        assert_difference 'Tag.count', -1 do
+        assert_difference "Tag.count", -1 do
           delete tag_path(tags(:mixing_1), format: :js)
         end
       end

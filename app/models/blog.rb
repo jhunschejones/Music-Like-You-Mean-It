@@ -2,11 +2,11 @@ class Blog < ApplicationRecord
   has_many :tags
   has_rich_text :content
   # used to query the attached ActionText directly
-  has_one :action_text_rich_text, class_name: 'ActionText::RichText', as: :record
+  has_one :action_text_rich_text, class_name: "ActionText::RichText", as: :record
 
   validates :title, presence: true
 
-  scope :published, -> { where('published_at < ? AND is_draft = ?', Time.now, false) }
+  scope :published, -> { where("published_at < ? AND is_draft = ?", Time.now, false) }
 
   before_save :format_named_url
 
@@ -18,7 +18,7 @@ class Blog < ApplicationRecord
 
   def format_named_url
     unless named_url.nil?
-      formatted_named_url = self.named_url.strip.downcase.split.join("-")
+      formatted_named_url = named_url.strip.downcase.split.join("-")
       self.named_url = formatted_named_url.empty? ? nil : formatted_named_url
     end
   end

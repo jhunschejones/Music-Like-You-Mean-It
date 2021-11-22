@@ -8,6 +8,6 @@ class Tag < ApplicationRecord
   private
 
   def format_text
-    self.text = self.text.strip.capitalize
+    self.text = text.strip.capitalize
   end
 end

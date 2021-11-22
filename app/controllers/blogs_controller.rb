@@ -13,20 +13,20 @@ class BlogsController < ApplicationController
     @blogs =
       if params[:tag].is_a? Array
         Blog.joins(:tags)
-            .where("tags.text IN (?)", params[:tag])
-            .distinct
-      elsif  params[:tag]
+          .where("tags.text IN (?)", params[:tag])
+          .distinct
+      elsif params[:tag]
         Blog.joins(:tags)
-            .where("tags.text = ?", params[:tag])
-            .distinct
+          .where("tags.text = ?", params[:tag])
+          .distinct
       elsif params[:q]
         Blog.joins(:tags, :action_text_rich_text)
-            .where("lower(action_text_rich_texts.body) LIKE ?", "%#{params[:q].strip.downcase}%")
-            .or(
-              Blog.joins(:tags, :action_text_rich_text)
-                  .where("lower(blogs.title) LIKE ?", "%#{params[:q].strip.downcase}%")
-            )
-            .distinct
+          .where("lower(action_text_rich_texts.body) LIKE ?", "%#{params[:q].strip.downcase}%")
+          .or(
+            Blog.joins(:tags, :action_text_rich_text)
+                .where("lower(blogs.title) LIKE ?", "%#{params[:q].strip.downcase}%")
+          )
+          .distinct
       else
         Blog.includes(:tags)
       end
@@ -36,7 +36,7 @@ class BlogsController < ApplicationController
         .paginate(page: params[:page] || 1, per_page: 10)
 
     if params[:q] && @blogs.present?
-      flash.now[:success] = "#{pluralize(@blogs.size, 'result')} matching '#{params[:q].strip.downcase}'"
+      flash.now[:success] = "#{pluralize(@blogs.size, "result")} matching '#{params[:q].strip.downcase}'"
     elsif params[:q]
       flash.now[:notice] = "No blogs matched the phrase '#{params[:q].strip.downcase}'"
     end

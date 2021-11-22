@@ -5,7 +5,6 @@
 #
 module BulmaPagination
   class Rails < WillPaginate::ActionView::LinkRenderer
-
     def to_html
       pages = pagination
       page_prev = pages.delete(:previous_page)
@@ -18,7 +17,7 @@ module BulmaPagination
     end
 
     def container_attributes
-      super.except(*[:link_options])
+      super.except(:link_options)
     end
 
     protected
@@ -52,9 +51,9 @@ module BulmaPagination
     def pagination_link(page)
       link_options = @options[:link_options] || {}
       if page == current_page
-        tag :li, tag(:span, page), class: ('pagination-link is-current')
+        tag :li, tag(:span, page), class: "pagination-link is-current"
       else
-        tag :li, link(page, page, link_options.merge(rel: rel_value(page), class: 'pagination-link'))
+        tag :li, link(page, page, link_options.merge(rel: rel_value(page), class: "pagination-link"))
       end
     end
 

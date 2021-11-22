@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 # bundle exec ruby -Itest test/mailers/user_mailer_test.rb
 class UserMailerTest < ActionMailer::TestCase

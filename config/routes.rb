@@ -1,23 +1,23 @@
 Rails.application.routes.draw do
-  root 'static_pages#workshop'
+  root "static_pages#workshop"
 
   controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
+    get "login" => :new
+    post "login" => :create
+    delete "logout" => :destroy
   end
 
   controller :static_pages do
-    get 'pages/privacy-policy' => :privacy
-    get 'pages/terms' => :terms
-    get 'pages/about' => :about
-    get 'workshop' => :workshop
-    get 'error' => :error
+    get "pages/privacy-policy" => :privacy
+    get "pages/terms" => :terms
+    get "pages/about" => :about
+    get "workshop" => :workshop
+    get "error" => :error
   end
 
-  post '/workshop_users', to: 'users#create_workshop_users'
+  post "/workshop_users", to: "users#create_workshop_users"
 
-  get '/unsubscribe', to: 'users#unsubscribe', as: :unsubscribe
+  get "/unsubscribe", to: "users#unsubscribe", as: :unsubscribe
   resources :users, only: [:index, :new, :create, :destroy]
   resources :blogs, except: [:delete, :destroy]
   resources :tags, only: [:destroy]
@@ -26,12 +26,12 @@ Rails.application.routes.draw do
       post :send_daily_email
     end
   end
-  get '/emails/:id/send_test_email', to: 'emails#test_email', as: :test_email
+  get "/emails/:id/send_test_email", to: "emails#test_email", as: :test_email
 
-  get '/blog', to: 'blogs#index' # old path from kajabi app
-  post '/blogs/search', to: 'blogs#index', as: :blog_search
+  get "/blog", to: "blogs#index" # old path from kajabi app
+  post "/blogs/search", to: "blogs#index", as: :blog_search
 
-  %w( 404 422 500 503 ).each do |code|
-    get code, :to => "static_pages#error", :code => code
+  %w[404 422 500 503].each do |code|
+    get code, to: "static_pages#error", code: code
   end
 end
