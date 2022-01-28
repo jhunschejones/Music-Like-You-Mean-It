@@ -34,7 +34,7 @@ body {
 }
 
 .page-container {
-  min-height: 84vh;
+  min-height: calc(100vh - 136px); // height of both navbars
 }
 
 .footer {

@@ -224,6 +224,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
         assert_equal "You have successfully unsubscribed.", flash[:notice]
       end
     end
+
+    describe "when an authenticated admin makes a js request" do
+      before do
+        login_as(users(:site_admin))
+      end
+
+      test "destroys the target user" do
+        assert_difference 'User.count', -1 do
+          delete user_path(users(:site_user), format: :js)
+        end
+      end
+
+      test "responds with a js remove payload" do
+        delete user_path(users(:site_user), format: :js)
+        assert_equal "var user = document.querySelector(\".user_#{users(:site_user).id}\");\nuser.parentNode.removeChild(user);\n", response.body
+      end
+    end
   end
 
   private

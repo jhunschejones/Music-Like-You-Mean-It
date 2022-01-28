@@ -30,7 +30,7 @@ class TagsControllerTest < ActionDispatch::IntegrationTest
         login_as(users(:site_admin))
       end
 
-      test "user is blocked from deleting tags" do
+      test "user can delete tags" do
         assert_difference "Tag.count", -1 do
           delete tag_path(tags(:mixing_1), format: :js)
         end
